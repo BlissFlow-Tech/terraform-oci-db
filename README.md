@@ -12,8 +12,9 @@ module "db" {
   compartment_id                                       = "ocid1.compartment.oc1..example"
   db_system_display_name                               = "app-db"
   db_system_credentials_username                       = "dbadmin"
-  db_system_credentials_password_details_password_type = "VAULT"
-  vault_secret_id                                      = "ocid1.vaultsecret.oc1..example"
+  db_system_credentials_password_details_password_type  = "VAULT_SECRET"
+  vault_secret_id                                       = "ocid1.vaultsecret.oc1..example"
+  db_system_credentials_password_details_secret_version = 1
 
   db_subnet = {
     vcn_id             = "ocid1.vcn.oc1..example"
@@ -38,7 +39,7 @@ module "db" {
 ## Notes
 
 * Set either `subnet_id` (an existing subnet) or `db_subnet` (a private subnet the module creates).
-* The admin password comes from `db_system_credentials_password_details_password` with `PLAIN_TEXT`, or from `vault_secret_id` with `VAULT`.
+* The admin password comes from `db_system_credentials_password_details_password` with `PLAIN_TEXT`, or from `vault_secret_id` and `db_system_credentials_password_details_secret_version` with `VAULT_SECRET`.
 * With `db_system_storage_details_is_regionally_durable = false` the storage is placed in the first availability domain of the compartment.
 * Backups and maintenance are configured through `management_policy`.
 * `restore_from_backup_id` creates the DB system from an existing backup. `db_system_source_source_type = "BACKUP"` instead takes an on-demand backup described by `psql_backup`.
@@ -79,8 +80,8 @@ module "db" {
 | apply\_config | How a configuration change is applied to the DB system, e.g. RESTART or RELOAD | `string` | `null` | no |
 | db\_subnet | Dedicated private subnet to create for the DB system when subnet\_id is null | <pre>object({<br/>    vcn_id             = string<br/>    nat_route_table_id = string<br/>    cidr_block         = optional(string)<br/>    display_name       = optional(string, "db-subnet")<br/>    dns_label          = optional(string, "psql")<br/>    security_list_ids  = optional(list(string))<br/>  })</pre> | `null` | no |
 | db\_system\_credentials\_password\_details\_password | Admin password, when password\_type is PLAIN\_TEXT | `string` | `null` | no |
-| db\_system\_credentials\_password\_details\_password\_type | Type of password (e.g., PLAIN\_TEXT or VAULT). | `string` | `"PLAIN_TEXT"` | no |
-| db\_system\_credentials\_password\_details\_secret\_version | Version of the Vault secret holding the admin password, when password\_type is VAULT; null uses the latest | `number` | `null` | no |
+| db\_system\_credentials\_password\_details\_password\_type | Type of password: PLAIN\_TEXT or VAULT\_SECRET | `string` | `"PLAIN_TEXT"` | no |
+| db\_system\_credentials\_password\_details\_secret\_version | Version of the Vault secret holding the admin password, required when password\_type is VAULT\_SECRET | `number` | `null` | no |
 | db\_system\_db\_version | The PostgreSQL version of the DB system. | `string` | `"16"` | no |
 | db\_system\_description | Description of the DB system | `string` | `null` | no |
 | db\_system\_instance\_count | Number of database nodes; null uses the OCI default | `number` | `null` | no |
@@ -108,7 +109,7 @@ module "db" {
 | psql\_backup | On-demand backup taken when db\_system\_source\_source\_type is BACKUP | <pre>object({<br/>    display_name     = string<br/>    description      = optional(string)<br/>    retention_period = optional(string)<br/>    defined_tags     = optional(map(string))<br/>    freeform_Tags = optional(map(string)<br/>    )<br/>  })</pre> | `null` | no |
 | restore\_from\_backup\_id | OCID of a backup to restore the DB system from | `string` | `null` | no |
 | subnet\_id | OCID of an existing subnet for the DB system; when null, the subnet created from db\_subnet is used | `string` | `null` | no |
-| vault\_secret\_id | OCID of the Vault secret holding the admin password, when password\_type is VAULT | `string` | `null` | no |
+| vault\_secret\_id | OCID of the Vault secret holding the admin password, when password\_type is VAULT\_SECRET | `string` | `null` | no |
 
 ## Outputs
 

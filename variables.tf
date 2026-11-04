@@ -33,12 +33,12 @@ variable "db_system_credentials_username" {
 
 variable "db_system_credentials_password_details_password_type" {
   type        = string
-  description = "Type of password (e.g., PLAIN_TEXT or VAULT)."
+  description = "Type of password: PLAIN_TEXT or VAULT_SECRET"
   default     = "PLAIN_TEXT"
 }
 
 variable "vault_secret_id" {
-  description = "OCID of the Vault secret holding the admin password, when password_type is VAULT"
+  description = "OCID of the Vault secret holding the admin password, when password_type is VAULT_SECRET"
   type        = string
   default     = null
 }
@@ -51,7 +51,7 @@ variable "db_system_credentials_password_details_password" {
 }
 
 variable "db_system_credentials_password_details_secret_version" {
-  description = "Version of the Vault secret holding the admin password, when password_type is VAULT; null uses the latest"
+  description = "Version of the Vault secret holding the admin password, required when password_type is VAULT_SECRET"
   type        = number
   default     = null
 }
