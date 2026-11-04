@@ -120,7 +120,7 @@ module "db" {
 | config\_id | The OCID of the configuration associated with the database system. |
 | connection\_details | DB connection details |
 | credentials | Database credentials |
-| db-subnet | The dedicated subnet created from db\_subnet, or null |
+| db\_subnet | The dedicated subnet created from db\_subnet, or null |
 | db\_version | The major and minor versions of the database system software. |
 | defined\_tags | Defined tags for this resource. |
 | description | A description of the database system. |
