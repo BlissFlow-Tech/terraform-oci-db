@@ -1,0 +1,7 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "password_type enum values, not passwords"
+regexTarget = "line"
+regexes = ['''^\s*db_system_credentials_password_details_password_type\s*=\s*"(PLAIN_TEXT|VAULT_SECRET)"$''']

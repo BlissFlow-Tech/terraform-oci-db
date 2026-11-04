@@ -17,3 +17,8 @@ variable "admin_password_secret_id" {
   description = "OCID of the Vault secret holding the admin password"
   type        = string
 }
+
+variable "admin_password_secret_version" {
+  description = "Version number of the Vault secret holding the admin password"
+  type        = number
+}

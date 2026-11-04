@@ -1,11 +1,12 @@
 module "db" {
   source = "../.."
 
-  compartment_id                                       = var.compartment_id
-  db_system_display_name                               = "app-db"
-  db_system_credentials_username                       = "dbadmin"
-  db_system_credentials_password_details_password_type = "VAULT"
-  vault_secret_id                                      = var.admin_password_secret_id
+  compartment_id                                        = var.compartment_id
+  db_system_display_name                                = "app-db"
+  db_system_credentials_username                        = "dbadmin"
+  db_system_credentials_password_details_password_type  = "VAULT_SECRET"
+  vault_secret_id                                       = var.admin_password_secret_id
+  db_system_credentials_password_details_secret_version = var.admin_password_secret_version
 
   db_subnet = {
     vcn_id             = var.vcn_id
