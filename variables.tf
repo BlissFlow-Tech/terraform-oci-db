@@ -216,8 +216,7 @@ variable "psql_backup" {
     description      = optional(string)
     retention_period = optional(string)
     defined_tags     = optional(map(string))
-    freeform_Tags = optional(map(string)
-    )
+    freeform_tags    = optional(map(string))
   })
   default = null
 }

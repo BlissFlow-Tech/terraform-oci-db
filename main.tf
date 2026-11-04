@@ -115,7 +115,7 @@ resource "oci_psql_backup" "this" {
 
   defined_tags     = merge(var.defined_tags, var.psql_backup.defined_tags)
   description      = var.psql_backup.description
-  freeform_tags    = merge(var.freeform_tags, var.psql_backup.freeform_Tags)
+  freeform_tags    = merge(var.freeform_tags, var.psql_backup.freeform_tags)
   retention_period = var.psql_backup.retention_period
 }
 
