@@ -29,7 +29,7 @@ resource "oci_psql_db_system" "this" {
     is_regionally_durable = var.db_system_storage_details_is_regionally_durable
     system_type           = var.db_system_storage_details_system_type
 
-    availability_domain = var.db_system_storage_details_is_regionally_durable == false ? data.oci_identity_availability_domains.this.availability_domains[0].name : var.db_system_storage_details_system_type
+    availability_domain = var.db_system_storage_details_is_regionally_durable ? null : data.oci_identity_availability_domains.this.availability_domains[0].name
     iops                = var.db_system_storage_details_iops
   }
 
