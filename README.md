@@ -7,7 +7,7 @@ Terraform module that creates an OCI Database with PostgreSQL system, optionally
 ```hcl
 module "db" {
   source  = "blissflow-tech/db/oci"
-  version = "~> 1.0"
+  version = "~> 1.1"
 
   compartment_id                                       = "ocid1.compartment.oc1..example"
   db_system_display_name                               = "app-db"
