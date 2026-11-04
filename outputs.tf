@@ -174,7 +174,7 @@ output "backup" {
   }
 }
 
-output "db-subnet" {
+output "db_subnet" {
   description = "The dedicated subnet created from db_subnet, or null"
   value = var.db_subnet != null ? {
     id                         = one(oci_core_subnet.db_subnet[*].id)
